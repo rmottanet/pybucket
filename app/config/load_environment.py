@@ -7,6 +7,14 @@ from dotenv import load_dotenv
 
 
 def load_environment_variables():
+    """
+    Load BitBucket app password from .env file, system keychain, or prompt user.
+    
+    Try in this order:
+    1. .env file.
+    2. System.
+    3. User input.
+    """
     # Construct path to .env file.
     dotenv_path = os.path.join(os.path.dirname(__file__), '../..', '.env')
     
