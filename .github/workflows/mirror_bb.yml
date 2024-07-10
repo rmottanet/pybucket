@@ -1,0 +1,41 @@
+name: Mirror on Bitbucket
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [ "main" ]
+
+jobs:
+  sync_to_bitbucket:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Extract repository name
+        id: extract_repo_name
+        run: echo "REPO_NAME=$(echo $GITHUB_REPOSITORY | cut -d'/' -f2)" >> $GITHUB_ENV
+        
+      - name: Set up Git
+        run: | 
+          git config --global user.email "${{ secrets.BITBUCKET_EMAIL }}"
+          git config --global user.name "${{ secrets.BITBUCKET_USER }}"
+        env:
+          BITBUCKET_EMAIL: ${{ secrets.BITBUCKET_EMAIL }}
+          BITBUCKET_USER: ${{ secrets.BITBUCKET_USER }}
+
+      - name: Remove shallow update
+        run: git fetch --prune --unshallow
+
+      - name: Pull from Bitbucket
+        run: |
+          git remote add bitbucket https://x-token-auth:${{ secrets.BITBUCKET_TOKEN }}@bitbucket.org/rmottalabs/${{ env.REPO_NAME }}.git
+          git fetch bitbucket
+          git pull bitbucket main --rebase
+
+      - name: Push to Bitbucket
+        run: |
+          git push bitbucket --all
+          git push bitbucket --tags
+        env:
+          BITBUCKET_TOKEN: ${{ secrets.BITBUCKET_TOKEN }}
