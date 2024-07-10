@@ -2,22 +2,22 @@
 
 ## ctrl+s :v:
 
-Welcome to PyBucket, a CLI (Command Line Interface) developed in Python with the purpose of simplifying interactions with Bitbucket directly from the command line. Currently, PyBucket offers basic functionalities to create, edit, and delete repositories on Bitbucket. This project is under constant development, with plans to expand its features in the future.
+Salve! Este é o PyBucket, um CLI (Command Line Interface) desenvolvido em Python com o objetivo de simplificar as interações com o Bitbucket diretamente da linha de comando. Atualmente, PyBucket oferece funcionalidades básicas para criar, editar e excluir repositórios no Bitbucket. Este projeto está em constante desenvolvimento, com planos de expansão de suas funcionalidades no futuro.
 
 
-## Requirements
+## Requisitos
 
 + [python-dotenv](https://github.com/theskumar/python-dotenv)
 + [requests](https://github.com/psf/requests)
 
-    > Note: You'll need to create an app password in your BitBucket settings to grant PyBucket access to your repositories.
+    > Nota: Você precisará criar uma senha de aplicativo nas configurações do BitBucket para conceder acesso ao PyBucket aos seus repositórios.
     >
     > https://support.atlassian.com/bitbucket-cloud/docs/create-an-app-password/
 
 
-## Usage
+## Uso
 
-You may want to activate the virtual environment before running the pip install or python commands.
+Você pode querer ativar o ambiente virtual antes de executar os comandos pip install ou python.
 
 ```bash
 pip install -r requirements.txt
@@ -27,7 +27,8 @@ pip install -r requirements.txt
 python app/interface/cli.py -h
 ```
 
-```bash
+```shell
+
 usage: cli.py [-h] [-n NEW [NEW ...]] [-d DELETE [DELETE ...]] [-e EDIT [EDIT ...]] --workspace WORKSPACE [--project PROJECT] [--public]
 
 PyBucket - A tiny BitBucket CLI.
@@ -52,7 +53,7 @@ optional arguments:
 
 ---
 
-Thank you for considering **PyBucket** for your needs. While it may be a modest tool compared to others, I hope it proves useful in simplifying your interactions with Bitbucket. If you have any feedback or suggestions, don't hesitate to reach out. Nice coding!
+Obrigado por considerar o **PyBucket** para suas necessidades. Embora possa ser uma ferramenta modesta em comparação com outras, espero que seja útil para simplificar suas interações com o Bitbucket. Se você tiver algum comentário ou sugestão, não hesite em entrar em contato. Boa codificação!
 
 <br />
 <br />
