@@ -13,6 +13,15 @@ from app.display.error_display import display_error
 
 
 def parse_arguments():
+    """
+    Parses command-line arguments using argparse.
+
+    This function defines the arguments accepted by the PyBucket CLI tool and returns a namespace object containing the parsed arguments.
+
+    Returns:
+        argparse.Namespace: An object containing parsed arguments.
+    """
+    
     parser = argparse.ArgumentParser(
         description='PyBucket - A tiny BitBucket CLI.',
         formatter_class=argparse.RawTextHelpFormatter
@@ -57,6 +66,22 @@ def parse_arguments():
 
 
 def bb_create_repo(repository_name, description=None, is_private=None, workspace=None, project=None):
+    """
+    Creates a new BitBucket repository.
+
+    This function handles creating a new repository by:
+        * Validating that the `project` argument is provided (required for creating new repositories).
+        * Creating a `RepositoriesHandler` instance to interact with BitBucket.
+        * Calling the `create_repository` method of the handler to perform the creation.
+        * Printing the success or error message returned by the handler.
+
+    Args:
+        repository_name (str): The desired name for the new repository.
+        description (str, optional): An optional description for the repository. Defaults to None.
+        is_private (bool, optional): Specifies if the repository should be private (True) or public (False). Defaults to True.
+        workspace (str, optional): The Bitbucket workspace where the repository will be created. Defaults to None.
+        project (str, optional): The Bitbucket project key associated with the repository (required).
+    """
     from app.handlers.repositories_handler import RepositoriesHandler
     
     try:
@@ -72,6 +97,18 @@ def bb_create_repo(repository_name, description=None, is_private=None, workspace
 
 
 def bb_delete_repo(repository_name, workspace=None):
+    """
+    Deletes a BitBucket repository.
+
+    This function handles deleting a repository by:
+        * Creating a `RepositoriesHandler` instance to interact with BitBucket.
+        * Calling the `delete_repository` method of the handler to perform the deletion.
+        * Printing the success or error message returned by the handler.
+
+    Args:
+        repository_name (str): The name of the repository to be deleted.
+        workspace (str, optional): The Bitbucket workspace where the repository resides. Defaults to None.
+    """
     from app.handlers.repositories_handler import RepositoriesHandler
 
     try:
@@ -85,6 +122,20 @@ def bb_delete_repo(repository_name, workspace=None):
 
 
 def bb_edit_repo(repository_name, workspace, description=None, is_private=None):
+    """
+    Edits a BitBucket repository.
+
+    This function handles editing a repository by:
+        * Creating a `RepositoriesHandler` instance to interact with BitBucket.
+        * Calling the `edit_repository` method of the handler to perform the update.
+        * Printing the success or error message returned by the handler.
+
+    Args:
+        repository_name (str): The name of the repository to be edited.
+        workspace (str): The Bitbucket workspace where the repository resides.
+        description (str, optional): An optional new description for the repository. Defaults to None (no change).
+        is_private (bool, optional): An optional boolean to set the repository's privacy (True for private, False for public). Defaults to None (no change).
+    """
     from app.handlers.repositories_handler import RepositoriesHandler
     
     try:
@@ -98,6 +149,18 @@ def bb_edit_repo(repository_name, workspace, description=None, is_private=None):
 
 
 if __name__ == "__main__":
+    """
+    Main execution block.
+
+    This block performs the following steps:
+        1. Loads environment variables containing username and app password.
+        2. Parses command-line arguments using `parse_arguments`.
+        3. Creates a dictionary mapping commands to their respective functions (`bb_create_repo`, `bb_delete_repo`, `bb_edit_repo`).
+        4. Iterates over the command map and executes the corresponding function based on the provided command.
+            * For the `new` command, it extracts arguments considering the possibility of an optional description.
+            * For the `delete` command, it extracts the repository name and workspace.
+            * For the `edit` command, it extracts arguments considering optional description and privacy flags.
+    """
     #app_password, username = load_environment_variables()
     load_environment_variables()
     app_password = os.getenv("BITBUCKET_APP_PASS")
