@@ -30,6 +30,5 @@ def load_environment_variables():
         # Prompt.
         app_password = input("Insert an app password: ")
         username = input("Insert bitbucket user name: ")
-        # Add a new environment variable
-        os.environ["BITBUCKET_APP_PASS"] = app_password
-        os.environ["BITBUCKET_USER"] = username
+    
+    return username, app_password

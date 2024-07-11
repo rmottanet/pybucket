@@ -24,7 +24,7 @@ pip install -r requirements.txt
 ```
 
 ```bash
-python app/interface/cli.py -h
+python app/main.py -h
 ```
 
 ```shell
